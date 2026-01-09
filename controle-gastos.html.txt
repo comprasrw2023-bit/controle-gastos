@@ -1,0 +1,133 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle de Gastos com Corridas</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .app {
+      background: #ffffff;
+      width: 320px;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+
+    h1 {
+      margin-top: 0;
+      text-align: center;
+      color: #2e7d32;
+    }
+
+    p {
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 12px;
+      background: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 15px;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+
+    li {
+      background: #f7f7f7;
+      padding: 8px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .total {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app">
+    <h1>Controle de Gastos</h1>
+    <p>Suas corridas, seus gastos.</p>
+
+    <input type="text" id="descricao" placeholder="Descrição da corrida">
+    <input type="number" id="valor" placeholder="Valor (R$)">
+
+    <button onclick="adicionarGasto()">Adicionar corrida</button>
+
+    <ul id="lista"></ul>
+
+    <div class="total">Total: R$ <span id="total">0.00</span></div>
+  </div>
+
+  <script>
+    let total = 0;
+
+    function adicionarGasto() {
+      const descricao = document.getElementById('descricao').value.trim();
+      const valor = parseFloat(document.getElementById('valor').value);
+
+      if (descricao === '' || isNaN(valor)) {
+        alert('Preencha a descrição e o valor corretamente');
+        return;
+      }
+
+      const item = document.createElement('li');
+      item.textContent = `${descricao} - R$ ${valor.toFixed(2)}`;
+
+      document.getElementById('lista').appendChild(item);
+
+      total += valor;
+      document.getElementById('total').textContent = total.toFixed(2);
+
+      document.getElementById('descricao').value = '';
+      document.getElementById('valor').value = '';
+    }
+  </script>
+
+</body>
+</html>
+```
